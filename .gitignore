@@ -1,0 +1,7 @@
+data/QMugs
+data/QM9
+logs
+*__pycache__
+*.pkl
+*.pickle
+data_check.ipynb
