@@ -17,12 +17,21 @@ conda env create -f lacl.yaml
 conda activate lacl
 ```
 # Dataset
-You can download datasets used in the paper [here]() and extract the zip file under `./data` folder. Both QM9 and QMugs should be saved in the folder under their name. Conformations of all the data is pickled after preprocessing. 
+You can download datasets used in the paper [here](https://drive.google.com/drive/folders/1pVFronnO5AY2TSQLygCR8TUPeWeTKn9I?usp=sharing) and extract the zip file under `./data` folder. Both QM9 and QMugs should be saved in the folder under their name. Conformations of all the data is pickled after preprocessing. 
 ## [QM9](https://figshare.com/collections/Quantum_chemistry_structures_and_properties_of_134_kilo_molecules/978904)
 `qm9_all.pickle`   
-List of dictionaries with properties. One dictionary corresponds to one molecule. It also contains cartesian coordinates of MMFF conformations and MMFF potential.
+List of dictionaries with properties. One dictionary corresponds to one molecule. It also contains cartesian coordinates of MMFF conformations and MMFF potential.   
 `qm9_all_cgcf.pkl`   
-List of rdkit molecules with cartesian coordinates of CGCF-ConfGen conformations. They were calculated by official [CGCF-ConfGen](https://github.com/MinkaiXu/CGCF-ConfGen) implements.
+List of rdkit molecules with cartesian coordinates of CGCF-ConfGen conformations. They were calculated by the official implement of [CGCF-ConfGen](https://github.com/MinkaiXu/CGCF-ConfGen).
+
+## [QMugs](https://www.research-collection.ethz.ch/handle/20.500.11850/482129)
+`QMugs_20_energy.pkl`    
+list of dataframes containing identifiers, properties, SMILES, and rdkit mols.   
+`QMugs_20_energy_mmff.pkl`   
+List of rdkit molecules with cartesian coordinates of MMFF conformations. They were calculated by rdkit MMFF optimization.   
+`QMugs_20_energy_cgcf.pkl`    
+List of rdkit molecules with cartesian coordinates of CGCF-ConfGen conformations. They were calculated by the official implement of [CGCF-ConfGen](https://github.com/MinkaiXu/CGCF-ConfGen).
+
 
 # Training
 ```
