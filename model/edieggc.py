@@ -271,7 +271,7 @@ class Decoder(nn.Module):
             v, x, y, z = module(g, lg, v, x, y, z)
 
         # norm-activation-pool-classify
-        if self.target == 'mu':
+        if self.target == 'mu' or self.target == 'GFN2:DIPOLE':
             g.edata['v'] = v
             g.update_all(fn.copy_e("v", "v"), fn.sum("v", "out"))
 
