@@ -1,4 +1,4 @@
-name: clamp
+name: lacl
 channels:
   - psi4
   - conda-forge
