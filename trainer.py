@@ -43,22 +43,18 @@ def train_run(args, directory, train_loader, valid_loader, test_loader, test_ind
 
     elif args.scheduler == "onecycle":
         steps_per_epoch = len(train_loader)
-        # pct_start = args.warmup_steps / (args.epochs * steps_per_epoch)
         scheduler = torch.optim.lr_scheduler.OneCycleLR(
             optimizer,
             max_lr=args.learning_rate,
             epochs=args.epochs,
             steps_per_epoch=steps_per_epoch,
-            # pct_start=pct_start,
             pct_start=0.3,
         )
     elif args.scheduler == "step":
-        # pct_start = args.warmup_steps / (args.epochs * steps_per_epoch)
         scheduler = torch.optim.lr_scheduler.StepLR(
             optimizer,
         )
     elif args.scheduler == "plateau":
-        # pct_start = args.warmup_steps / (args.epochs * steps_per_epoch)
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             optimizer,
             factor=0.5,
@@ -209,7 +205,6 @@ class ModelTrainer:
         # self.model = BGRL(args).to(self.device)
         self.model = BGRL(args)
         if self.args.finetune:
-            # self.model.load_state_dict(torch.load('logs/20230712_115640_mmff_gap_b/mmff_gap_b'))
             self.model.load_state_dict(torch.load('logs/20230802_173538_qmugs_20_cgcf_fe_b/qmugs_20_cgcf_fe_b'))
             if self.args.freeze:
                 self.model.online_encoder.requires_grad_(False)
@@ -314,7 +309,6 @@ class ModelTrainer:
                 g2 = g2.to(self.device)
                 lg2 = lg2.to(self.device)
                 label = label.to(self.device)
-                # loss_1, loss_2, bgrl_loss = self.calculate_loss(g1, g2, label, split)
                 loss_1, loss_2, bgrl_loss = self.calculate_loss(g1, lg1, g2, lg2, label, split)
                 running_loss += loss_1 * g1.batch_size + loss_2 * g2.batch_size
                 running_bgrl_loss += bgrl_loss * g1.batch_size
@@ -333,7 +327,6 @@ class ModelTrainer:
                 lg2 = lg2.to(self.device)
                 label = label.to(self.device)
                 with torch.no_grad():
-                    # loss_1, loss_2, _ = self.calculate_loss(g1, g2, label, split)
                     loss_1, loss_2, bgrl_loss = self.calculate_loss(g1, lg1, g2, lg2, label, split)
                     running_loss_1 += loss_1 * g1.batch_size
                     running_loss_2 += loss_2 * g2.batch_size
@@ -347,16 +340,9 @@ class ModelTrainer:
 
     def calculate_loss(self, g1, lg1, g2, lg2, label, split):
         pred_1, pred_2, bgrl_loss, _, _, _, _ = self.model(g1, lg1, g2, lg2)
-    # def calculate_loss(self, g1, g2, label, split):
-    #     pred_1, pred_2, bgrl_loss, _, _ = self.model(g1, g2)
         if split == 'train':
-            # label_loss_1 = torch.sqrt(torch.nn.functional.mse_loss(pred_1, label))
-            # label_loss_2 = torch.sqrt(torch.nn.functional.mse_loss(pred_2, label))
-            # # loss = bgrl_loss + label_loss_1 + label_loss_2
-            # loss = bgrl_loss + label_loss_2
             label_loss_1 = torch.sqrt(torch.nn.functional.mse_loss(pred_1, label))
             label_loss_2 = torch.sqrt(torch.nn.functional.mse_loss(pred_2, label))
-            # loss = bgrl_loss + label_loss_1 + label_loss_2
             if self.args.loss == 'contrastive':
                 loss = bgrl_loss
             elif self.args.loss == 'prediction':
