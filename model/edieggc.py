@@ -1,10 +1,7 @@
-from typing import Tuple, Union
-
 import dgl
 import dgl.function as fn
-import numpy as np
 import torch
-from dgl.nn import SumPooling, AvgPooling
+from dgl.nn import AvgPooling
 
 from model.utils import RBFExpansion, BentIdentity
 import torch as th
@@ -271,7 +268,7 @@ class Decoder(nn.Module):
             v, x, y, z = module(g, lg, v, x, y, z)
 
         # norm-activation-pool-classify
-        if self.target == 'mu' or self.target == 'GFN2:DIPOLE':
+        if self.target == 'mu':
             g.edata['v'] = v
             g.update_all(fn.copy_e("v", "v"), fn.sum("v", "out"))
 
