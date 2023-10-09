@@ -8,8 +8,8 @@ Seoul National University
 
 
 ![](images/Advantage_of_our_approach_revision.png)
-
->In this work, we propose a novel method called Local Atomic environment Contrastive Learning (LACL) which is a deep contrastive learning-based domain adaptation method. LACL effectively treats the trade-off between cost-effective conformation generation and prediction accuracy by minimizing the distance between molecular geometry embeddings instead of generating conformations directly. We demonstrate that our approach achieves quantum chemical accuracy without density functional theory (DFT) geometric relaxation, while also speeding up the inference time 100-fold faster than DFT optimization-based models.
+## Abstract
+>Data-driven deep learning algorithms provide accurate prediction of high-level quantum-chemical molecular properties. However, their inputs must be constrained to the same quantum-chemical level of geometric relaxation as same with the training dataset, limiting their flexibility. Adopting alternative cost-effective conformation generative methods introduces domain shift problems, deteriorating prediction accuracy. Here we propose a novel deep contrastive learning-based domain adaptation method called Local Atomic environment Contrastive Learning (LACL). LACL learns to alleviate the disparities in distribution between the two geometric conformations by comparing different conformation generation methods. We found that LACL forms a domain-agnostic latent space that encapsulates the semantics of an atom's local atomic environment. LACL achieves quantum chemical accuracy while circumventing the geometric relaxation bottleneck and could enable future application scenarios like inverse molecular engineering and large-scale screening. Our approach is also generalizable from small organic molecules to long chains of biological and pharmacological molecules.
 
 # Installation
 ```
@@ -26,11 +26,17 @@ List of rdkit molecules with cartesian coordinates of CGCF-ConfGen conformations
 
 ## [QMugs](https://www.research-collection.ethz.ch/handle/20.500.11850/482129)
 `QMugs_20_energy.pkl`    
-list of dataframes containing identifiers, properties, SMILES, and rdkit mols.   
+List of dataframes containing identifiers, properties, SMILES, and rdkit mols with less than or equal to 20 number of heavy atoms.   
 `QMugs_20_energy_mmff.pkl`   
 List of rdkit molecules with cartesian coordinates of MMFF conformations. They were calculated by rdkit MMFF optimization.   
 `QMugs_20_energy_cgcf.pkl`    
-List of rdkit molecules with cartesian coordinates of CGCF-ConfGen conformations. They were calculated by the official implement of [CGCF-ConfGen](https://github.com/MinkaiXu/CGCF-ConfGen).
+List of rdkit molecules with cartesian coordinates of CGCF-ConfGen conformations. They were calculated by the official implement of [CGCF-ConfGen](https://github.com/MinkaiXu/CGCF-ConfGen).   
+     
+`QMugs_{num}_energy_test.pkl`   
+List of dataframes containing identifiers, properties, SMILES, and rdkit mols with `num` number of heavy atoms. `ex` means mols with more than 40 heavy atoms   
+`QMugs_{num}_energy_mmff.pkl`   
+List of rdkit molecules including `num` number of heavy atoms with cartesian coordinates of MMFF conformations.   
+
 
 
 # Training
@@ -39,7 +45,7 @@ To train LACL, please input following in terminal.
 python main.py
 ```
 ## Arguments explanations    
-Please refer main.py for details of remaining arguments. Here we show some important arguments briefly.   
+Please refer `main.py` for details of remaining arguments. Here we show some important arguments briefly.   
 `--lacl`    
 True for training LACL, False for training modified-ALIGNN    
 `--loss`    
