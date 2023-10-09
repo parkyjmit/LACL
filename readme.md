@@ -11,7 +11,7 @@ Seoul National University
 
 >In this work, we propose a novel method called Local Atomic environment Contrastive Learning (LACL) which is a deep contrastive learning-based domain adaptation method. LACL effectively treats the trade-off between cost-effective conformation generation and prediction accuracy by minimizing the distance between molecular geometry embeddings instead of generating conformations directly. We demonstrate that our approach achieves quantum chemical accuracy without density functional theory (DFT) geometric relaxation, while also speeding up the inference time 100-fold faster than DFT optimization-based models.
 
-# Instrallation
+# Installation
 ```
 conda env create -f lacl.yaml
 conda activate lacl
@@ -34,10 +34,12 @@ List of rdkit molecules with cartesian coordinates of CGCF-ConfGen conformations
 
 
 # Training
+To train LACL, please input following in terminal.
 ```
 python main.py
 ```
 ## Arguments explanations    
+Please refer main.py for details of remaining arguments. Here we show some important arguments briefly.   
 `--lacl`    
 True for training LACL, False for training modified-ALIGNN    
 `--loss`    
@@ -48,10 +50,15 @@ contrastive+prediction loss is default
 QM9: **mu**, alpha, **homo**, **lumo**, **gap**, r2, zpve, **U0**, U, **G**, H, and Cv.   
 QMugs: **GFN2:DIPOLE**, **GFN2:HOMO_LUMO_GAP**, **GFN2:TOTAL_FREE_ENERGY**, [Target labels](data/data.py)   
 `--geometry`   
-Select target domain
+Select target domain   
+   
+For example, to train LACL on QM9 dipole moment for adapting MMFF geometric domain,   
+```
+python main.py --lacl True --dataset QM9 --target mu --geometry MMFF
+```
 
 
-# Acknowledgment
+# Acknowledgement
 - Pytorch implementation of ALIGNN: https://github.com/usnistgov/alignn
 - Self-supervised learning strategies for GNN: https://github.com/nerdslab/bgrl
 - Data generation using CGCF-ConfGen: https://github.com/MinkaiXu/CGCF-ConfGen
