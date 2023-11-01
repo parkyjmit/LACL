@@ -4,4 +4,8 @@ logs
 *__pycache__
 *.pkl
 *.pickle
+*.pdf
+*.tif
+*.csv
 data_check.ipynb
+runs

@@ -56,4 +56,4 @@ class RBFExpansion(nn.Module):
         """Apply RBF expansion to interatomic distance tensor."""
         return torch.exp(
             -self.gamma * (distance.unsqueeze(1) - self.centers) ** 2
-        )*torch.cos(distance.unsqueeze(1)/self.vmax*np.pi/2)
+        )#*torch.cos(distance.unsqueeze(1)/self.vmax*np.pi/2)

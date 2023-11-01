@@ -17,7 +17,7 @@ conda env create -f lacl.yaml
 conda activate lacl
 ```
 # Dataset
-You can download datasets used in the paper [here](https://drive.google.com/drive/folders/1pVFronnO5AY2TSQLygCR8TUPeWeTKn9I?usp=sharing) and extract the zip file under `./data` folder. Both QM9 and QMugs should be saved in the folder under their name. Conformations of all the data is pickled after preprocessing. 
+You can download datasets used in the paper [here](https://doi.org/10.6084/m9.figshare.24445129) and extract the zip file under `./data` folder. Both QM9 and QMugs should be saved in the folder under their name. Conformations of all the data is pickled after preprocessing. 
 ## [QM9](https://figshare.com/collections/Quantum_chemistry_structures_and_properties_of_134_kilo_molecules/978904)
 `qm9_all.pickle`   
 List of dictionaries with properties. One dictionary corresponds to one molecule. It also contains cartesian coordinates of MMFF conformations and MMFF potential.   

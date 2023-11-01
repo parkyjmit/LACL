@@ -3,11 +3,9 @@ import dgl.function as fn
 import torch
 from dgl.nn import AvgPooling
 
-from model.utils import RBFExpansion, BentIdentity
-import torch as th
+from model.utils import RBFExpansion
 import torch.nn.functional as F
 from torch import nn
-from dgl.utils import expand_as_pair
 
 
 class EGGConv(nn.Module):
