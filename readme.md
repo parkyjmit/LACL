@@ -1,6 +1,6 @@
 # LACL
 
-Original codebase for [Deep Contrastive Learning of Molecular Conformation for Efficient Property Prediction]()
+Original codebase for [Deep Contrastive Learning of Molecular Conformation for Efficient Property Prediction](https://doi.org/10.1038/s43588-023-00560-w)
 
 Yang Jeong Park, HyunGi Kim, Jeonghee Jo and Sungroh Yoon   
 Massachusetts Institute of Technology   
